@@ -1,0 +1,6 @@
+/home/walter/C#/TestesUnitarios/Alura.Estacionamento.Testes/bin/Debug/net5.0/CoverletSourceRootsMapping
+/home/walter/C#/TestesUnitarios/Alura.Estacionamento.Testes/obj/Debug/net5.0/Alura.Estacionamento.Testes.csproj.AssemblyReference.cache
+/home/walter/C#/TestesUnitarios/Alura.Estacionamento.Testes/obj/Debug/net5.0/Alura.Estacionamento.Testes.GeneratedMSBuildEditorConfig.editorconfig
+/home/walter/C#/TestesUnitarios/Alura.Estacionamento.Testes/obj/Debug/net5.0/Alura.Estacionamento.Testes.AssemblyInfoInputs.cache
+/home/walter/C#/TestesUnitarios/Alura.Estacionamento.Testes/obj/Debug/net5.0/Alura.Estacionamento.Testes.AssemblyInfo.cs
+/home/walter/C#/TestesUnitarios/Alura.Estacionamento.Testes/obj/Debug/net5.0/Alura.Estacionamento.Testes.csproj.CoreCompileInputs.cache
