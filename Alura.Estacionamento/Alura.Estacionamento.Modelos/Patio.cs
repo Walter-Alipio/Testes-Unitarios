@@ -11,10 +11,11 @@ namespace Alura.Estacionamento.Modelos
   public class Patio
   {
     private Operador _operadorPatio;
-    public Patio()
+    public Patio(Operador operador)
     {
       Faturado = 0;
       veiculos = new List<Veiculo>();
+      _operadorPatio = operador;
     }
     private List<Veiculo> veiculos;
     private double faturado;
