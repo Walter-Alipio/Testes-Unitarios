@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Alura.Estacionamento.Modelos
 {
-  public class Veiculo
+  public class Veiculo : IEnumerable<Object[]>
   {
     //Campos
     private string _ticket;
@@ -116,6 +116,21 @@ namespace Alura.Estacionamento.Modelos
               $"Placa: {this.Placa}\n";
 
     }
+
+    public IEnumerator<object[]> GetEnumerator()
+    {
+      yield return new object[]
+           {
+                new Veiculo
+                {
+                    Proprietario = "André Silva",
+                    Placa = "ASD-9999",
+                    Cor="Verde",
+                    Modelo="Fusca"
+                }
+           };
+    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     //Construtor
     public Veiculo()
