@@ -1,30 +1,41 @@
 using Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Alura.Estacionamento.Testes;
 
-public class PatioTestes
+public class PatioTestes : IDisposable
 {
+  public ITestOutputHelper ConsoleOutPrintTest;
+  private Operador testOperator;
+  private Patio parking;
+  private Veiculo vehicle;
+
+  public PatioTestes(ITestOutputHelper _ConsoleOutPrintTest)
+  {
+    testOperator = new Operador { Nome = "Michel" };
+    parking = new Patio(testOperator);
+    vehicle = new Veiculo();
+    ConsoleOutPrintTest = _ConsoleOutPrintTest;
+  }
+
   [Fact]
   public void TestInvoicing()
   {
     // Arrange
-    var testOperator = new Operador { Nome = "Michel" };
-    var estacionamento = new Patio(testOperator);
-    var veiculo = new Veiculo();
 
-    veiculo.Proprietario = "Walter Alípio";
-    veiculo.Tipo = TipoVeiculo.Automovel;
-    veiculo.Cor = "Azul";
-    veiculo.Modelo = "Astra";
-    veiculo.Placa = "ads-9992";
+    vehicle.Proprietario = "Walter Alípio";
+    vehicle.Tipo = TipoVeiculo.Automovel;
+    vehicle.Cor = "Azul";
+    vehicle.Modelo = "Astra";
+    vehicle.Placa = "ads-9992";
 
-    estacionamento.RegistrarEntradaVeiculo(veiculo);
-    estacionamento.RegistrarSaidaVeiculo(veiculo.Placa);
+    parking.RegistrarEntradaVeiculo(vehicle);
+    parking.RegistrarSaidaVeiculo(vehicle.Placa);
 
     // Act
-    double invoicing = estacionamento.TotalFaturado();
+    double invoicing = parking.TotalFaturado();
 
     // Assert
     Assert.Equal(2, invoicing);
@@ -44,19 +55,16 @@ public class PatioTestes
   )
   {
     //Arrange
-    var testOperator = new Operador { Nome = "Michel" };
-    var estacionamento = new Patio(testOperator);
-    var veiculo = new Veiculo();
 
-    veiculo.Proprietario = owner;
-    veiculo.Placa = licensePlate;
-    veiculo.Cor = color;
-    veiculo.Modelo = model;
+    vehicle.Proprietario = owner;
+    vehicle.Placa = licensePlate;
+    vehicle.Cor = color;
+    vehicle.Modelo = model;
 
-    estacionamento.RegistrarEntradaVeiculo(veiculo);
-    estacionamento.RegistrarSaidaVeiculo(veiculo.Placa);
+    parking.RegistrarEntradaVeiculo(vehicle);
+    parking.RegistrarSaidaVeiculo(vehicle.Placa);
     //Act
-    double invoicing = estacionamento.TotalFaturado();
+    double invoicing = parking.TotalFaturado();
     //Assert
     Assert.Equal(2, invoicing);
   }
@@ -117,5 +125,10 @@ public class PatioTestes
     var changed = parking.AlteraDadosVeiculo(changedVehicle);
     // Then
     Assert.Equal(changed.Cor, changedVehicle.Cor);
+  }
+
+  public void Dispose()
+  {
+    ConsoleOutPrintTest.WriteLine("Construtor invocado.");
   }
 }

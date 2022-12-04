@@ -1,17 +1,26 @@
 using Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Alura.Estacionamento.Testes;
 
 public class VeiculoTestes
 {
-  [Fact(DisplayName = "Teste 1")]
-  [Trait("Function", "Speed Up")]
-  public void TestVehicleSpeedUp()
+  private Veiculo vehicle;
+  public ITestOutputHelper ConsoleOutPrintTest;
+  public VeiculoTestes(ITestOutputHelper _consoleOutPrintTest)
+  {
+    ConsoleOutPrintTest = _consoleOutPrintTest;
+    ConsoleOutPrintTest.WriteLine("Construtor invocado.");
+    vehicle = new Veiculo();
+  }
+
+  [Fact]
+  public void TestVehicleSpeedUpWithParam10()
   {
     //Arrange
-    var vehicle = new Veiculo();
+
     //Act
     vehicle.Acelerar(10);
     //Assert
@@ -20,10 +29,10 @@ public class VeiculoTestes
 
   [Fact(DisplayName = "Teste 2")]
   [Trait("Function", "Break")]
-  public void TestVehicleBreak()
+  public void TestVehicleBreakWithParam10()
   {
     //Arrange
-    var vehicle = new Veiculo();
+
     //Act
     vehicle.Frear(10);
     //Assert
@@ -34,7 +43,7 @@ public class VeiculoTestes
   public void TestTypeVehicle()
   {
     // Arrange
-    var vehicle = new Veiculo();
+
     // Act
 
     // Assert
@@ -53,10 +62,10 @@ public class VeiculoTestes
 
   [Theory]
   [ClassData(typeof(Veiculo))]
-  public void TestVehicleClass(Veiculo model)
+  public void TestVehicleClassParam10(Veiculo model)
   {
     //Arrange
-    var vehicle = new Veiculo();
+
     //Act
     vehicle.Acelerar(10);
     model.Acelerar(10);
@@ -69,7 +78,7 @@ public class VeiculoTestes
   {
     // Arrange
 
-    var vehicle = new Veiculo();
+
     vehicle.Proprietario = "Walter Alípio";
     vehicle.Tipo = TipoVeiculo.Automovel;
     vehicle.Cor = "Azul";
