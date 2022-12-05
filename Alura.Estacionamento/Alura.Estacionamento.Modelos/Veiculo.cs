@@ -12,7 +12,6 @@ namespace Alura.Estacionamento.Modelos
     private string _placa;
     private string _proprietario;
     private TipoVeiculo _tipo;
-
     //Propriedades
     public string Placa
     {

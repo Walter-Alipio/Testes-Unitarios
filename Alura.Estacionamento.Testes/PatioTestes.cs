@@ -71,7 +71,7 @@ public class PatioTestes : IDisposable
 
   [Theory]
   [InlineData("André Silva", "ASD-1498", "Preto", "Gol")]
-  public void TestFindVehicleInParking
+  public void TestFindVehicleInParkingByLicensePlate
   (
     string owner,
     string licensePlate,
@@ -127,8 +127,35 @@ public class PatioTestes : IDisposable
     Assert.Equal(changed.Cor, changedVehicle.Cor);
   }
 
+  [Theory]
+  [InlineData("André Silva", "ASD-1498", "Preto", "Gol")]
+  public void TestFindVehicleInParkingById
+ (
+   string owner,
+   string licensePlate,
+   string color,
+   string model
+ )
+  {
+    //Arrange
+    var testOperator = new Operador { Nome = "Michel" };
+    var parking = new Patio(testOperator);
+    var vehicle = new Veiculo();
+
+    vehicle.Proprietario = owner;
+    vehicle.Placa = licensePlate;
+    vehicle.Cor = color;
+    vehicle.Modelo = model;
+
+    parking.RegistrarEntradaVeiculo(vehicle);
+
+    //Act
+    var searched = parking.PesquisaVeiculoPorTicket(vehicle.IdTicket);
+    //Assert
+    Assert.Contains("### Ticket Estacionameno Alura ###", searched.Ticket);
+  }
   public void Dispose()
   {
-    ConsoleOutPrintTest.WriteLine("Construtor invocado.");
+    ConsoleOutPrintTest.WriteLine("Dispose invocado.");
   }
 }

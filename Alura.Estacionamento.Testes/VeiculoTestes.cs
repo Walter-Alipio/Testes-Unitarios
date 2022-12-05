@@ -12,7 +12,6 @@ public class VeiculoTestes
   public VeiculoTestes(ITestOutputHelper _consoleOutPrintTest)
   {
     ConsoleOutPrintTest = _consoleOutPrintTest;
-    ConsoleOutPrintTest.WriteLine("Construtor invocado.");
     vehicle = new Veiculo();
   }
 
@@ -88,5 +87,51 @@ public class VeiculoTestes
     string data = vehicle.ToString();
     // Assert
     Assert.Contains("Tipo do Veículo: Automovel", data);
+  }
+
+  [Fact]
+  public void TestVehicleOwnerNameWithLessThenThreeCharacters()
+  {
+    // Arrange
+    string ownerName = "Ab";
+
+    // Assert
+    Assert.Throws<System.FormatException>(
+      // Act
+      () => new Veiculo(ownerName)
+    );
+  }
+
+  [Fact]
+  public void TestExceptionMessageOfFourthCharacterOfLicensePlate()
+  {
+    // Arrange
+    string licensePlate = "ASDF8888";
+
+    // Act
+    var message = Assert.Throws<System.FormatException>(
+      () => new Veiculo().Placa = licensePlate
+    );
+
+    // Assert
+    Assert.Equal("O 4° caractere deve ser um hífen", message.Message);
+  }
+
+  [Fact]
+  public void TestExceptionMessageForLastCharactersOfLicensePlate()
+  {
+    // Arrange
+    string licensePlate = "ASD-F88e";
+
+    // Assert
+    Assert.Throws<System.FormatException>(
+      // Act
+      () => new Veiculo().Placa = licensePlate
+    );
+  }
+
+  public void Dispose()
+  {
+    ConsoleOutPrintTest.WriteLine("Dispose invocado.");
   }
 }
